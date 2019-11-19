@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+{% include 'nav.html' %}
+<div class="col-md-3">
+
+</div>
+
+    <!--<ul>-->
+        <!--{% for i in e %}-->
+        <!--{{i}}-->
+        <!--{% for d in i.mandatory_courses.all %}-->
+            <!--{% for d in trainings %}-->
+
+                <!--<li>{{d}}</li>-->
+
+
+        <!--{% endfor %} {% endfor %}-->
+        <!--{% endfor %}-->
+    <!--</ul>-->
+{% for i in emandatory %}
+    {{i}}
+{% endfor %}
+
+
+{% endblock %}

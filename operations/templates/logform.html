@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+{% include 'nav.html' %}
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Flights Entry Log</h1>
+            <!--<div class="btn-toolbar mb-2 mb-md-0">-->
+            <!--</div>-->
+          </div>
+ <form class="form-group inline " action="log_form" method="post">{% csrf_token %}
+        <div class="form-inline">
+
+          <div class="col-md-2">
+                    <input type="text" class="form-control form-control-sm" id="station"  placeholder="Station" name="station">
+          </div>
+          <div class="col-md-2">
+                    <input type="text" class="form-control form-control-sm" id="flightNumber"  placeholder="Flight number " name="flightNumber">
+          </div>
+          <div class="col-md-2">
+                    <input type="date" class="form-control form-control-sm" id="flightDate"  placeholder="Flight Date " name="flightDate">
+          </div>
+          <div class="col-md-2">
+                       <input type="text" class="form-control form-control-sm" id="routing"  placeholder="Routing " name="routing"></div>
+          <div class="col-md-2">
+                    <input type="time" class="form-control form-control-sm" id="arrivalTime" placeholder="arrival time " name="arrivalTime">
+          </div>
+          <div class="col-md-2">
+                   <input type="time" class="form-control form-control-sm" id="departureTime"  placeholder="departure time" name="departureTime"></div>
+
+        </div>
+    <br>
+           <div class="form-inline">
+      <div class="col-md-2">
+                <input type="number" class="form-control form-control-sm" id="cargoIn"  placeholder="cargo in" name="cargoIn"></div>
+      <div class="col-md-2">
+                <input type="number" class="form-control form-control-sm" id="cargoOut"  placeholder="cargo out " name="cargoOut"></div>
+               <div class="col-md-2">
+                <input type="number" class="form-control form-control-sm" id="mailIn" placeholder="Mail In " name="mailIn">
+      </div>
+               <div class="col-md-2">
+                   <input type="number" class="form-control form-control-sm" id="mailOut"  placeholder="Mail out " name="mailOut"></div>
+              <div class="col-md-2">
+                <input type="number" class="form-control form-control-sm" id="paxIn"  placeholder="Pax In " name="paxIn">
+      </div>
+               <div class="col-md-2">
+                   <input type="number" class="form-control form-control-sm" id="paxOut"  placeholder="Pax Out " name="paxOut"></div>
+        </div>
+            <br>
+            <div class="form-inline">
+      <div class="col-md-2">
+                <input type="number" class="form-control form-control-sm" id="pad" placeholder="PAD" name="pad"></div>
+      <div class="col-md-2">
+                <input type="number" class="form-control form-control-sm" id="asu"  placeholder="ASU " name="asu"></div>
+               <div class="col-md-2">
+                <input type="number" class="form-control form-control-sm" id="gpu" placeholder="GPU" name="gpu">
+      </div>
+               <div class="col-md-2">
+                   <input type="number" class="form-control form-control-sm" id="toiletBowser"  placeholder="Toilet Bowser " name="toiletBowser"></div>
+              <div class="col-md-2">
+                <input type="number" class="form-control form-control-sm" id="pau"  placeholder="PAU " name="pau">
+      </div>
+               <div class="col-md-2">
+                   <input type="number" class="form-control form-control-sm" id="waterCart"  placeholder="Water Cart" name="waterCart"></div>
+        </div>
+     <br>
+<div class="col-md-2">
+    <input class="btn btn-info btn-sm" type="submit" value="save" ></div>
+
+ </form>
+        </main>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+{% block content %}
+{% include 'operations_nav.html' %}
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          </div>
+          <div>
+            <div class="container report-form">
+        <div class=" col-md-12 ">
+        <form method="post" action="#">{% csrf_token%}
+        <div class="panel panel-default">
+              <div class="panel-heading"><h6><b>Hazard {{riskdetail.report_no}} Evaluation </b></h6></div>
+            <hr>
+            <div class="panel-body">
+                  <div class="row">
+                      <div class="col-md-3 "> {{evaluationForm.station|bootstrap }}</div>
+                      <div class="col-md-3"> {{evaluationForm.location_of_incident|bootstrap }}</div>
+                      <div class="col-md-6"> {{ evaluationForm.date_of_incident|bootstrap }}</div>
+                      <div class="col-md-3"> {{ evaluationForm.time_of_incident|bootstrap }}</div>
+                      <div class="col-md-3"> {{ evaluationForm.hazard_type|bootstrap }}</div>
+                      <div class="col-md-6"> {{ evaluationForm.hazard_category|bootstrap }}</div>
+              </div>
+                  <div class="row">
+                  <div class="col-md-6">{{ evaluationForm.incident_detail|bootstrap }}</div>
+                      <div class="col-md-6">{{ evaluationForm.proposed_mitigation|bootstrap }}</div>
+                      <div class="col-md-6">{{ evaluationForm.likelyhood|bootstrap }}</div>
+                  <div class="col-md-6"> {{ evaluationForm.severity|bootstrap }} </div>
+
+                    </div>
+              </div>
+        </div>
+              <div class="panel-body">
+
+                  <div class="row">
+                      <div class="col-md-6" aria-readonly="true">{{ evaluationForm.assignment|bootstrap}}</div>
+                      <div class="col-md-6">{{ evaluationForm.rating|bootstrap}}</div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-md-6">{{ evaluationForm.action_required|bootstrap}}</div>
+                      <div class="col-md-6">{{ evaluationForm.Action_Taken|bootstrap}}</div>
+                  </div>
+                  {{ evaluationForm.resources_required|bootstrap}}
+                   <div class="row">
+                      <div class="col-md-6">{{ evaluationForm.responsible_official|bootstrap}}</div>
+                      <div class="col-md-6">{{ evaluationForm.due_date|bootstrap}}</div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">{{ evaluationForm.residual_likelyhood|bootstrap}}</div>
+                      <div class="col-md-6">{{ evaluationForm.residual_severity|bootstrap}}</div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">{{ evaluationForm.status|bootstrap}}</div>
+                      <div class="col-md-6">{{evaluationForm.evidence_of_closure|bootstrap}}</div>
+                  </div>
+
+
+              </div>
+        
+            <button type='submit' class="btn btn-success" data-toggle="" style="width: 100%; margin-top: 10px;">Submit</button>
+        </form>
+
+          </div>
+
+          </div>
+          </div>
+
+             </main>
+{% endblock %}

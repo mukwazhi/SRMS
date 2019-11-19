@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+{% include 'operations_nav.html' %}
+   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Query Hazards</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+              </button>
+            </div>
+          </div>
+
+
+        <form class="form-inline">
+
+    <label>Hazard Type</label>
+      <div class="col-md-2">
+
+          <select style="width: 100%" class="form-control form-control-sm "  name="p">
+              <option selected="selected" value=" "> </option>
+              <option value="Aircraft Related">Aircraft Related</option>
+              <option value="Non Aircraft Related">Non Aircraft Related</option>
+
+          </select>
+      </div>
+             <label>Category</label>
+             <div class="col-md-2">
+          <select style="width: 100%" class="form-control form-control-sm"  name="q">
+              <option selected="selected" value=" "> </option>
+              <option value="Aircraft hazard">Aircraft Hazard</option>
+              <option value="Personal Injury">Personal Injury</option>
+              <option value="Equipment hazard">Equipment hazard</option>
+              <option value="Environmental hazard">Environmental hazard</option>
+              <option value="personal & equipment hazard">Personal & equipment hazard</option>
+          </select>
+      </div>
+            <label>Station</label>
+             <div class="col-md-2">
+          <select style="width: 100%" class="form-control form-control-sm"  name="r">
+              <option selected="selected" value="0"> </option>
+              {% for s in station %}
+              <option value="{{s.id}}">{{s.station}}</option>
+              {% endfor %}
+          </select>
+      </div>
+            <label>Location</label>
+             <div class="col-md-2">
+          <select style="width: 100%" class="form-control form-control-sm"  name="s">
+              <option selected="selected" value="0"></option>
+              {% for l in location %}
+              <option value="{{l.id}}">{{l.location}}</option>
+              {% endfor %}
+          </select>
+      </div>
+            <div class="col-md-1">
+                <label></label>
+             <input class="btn btn-info btn-sm" type="submit" value="S" >
+            </div>
+
+        </form>
+<hr>
+          <div class="table-responsive">
+              {% if filter_results %}
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                    <th> Report #</th>
+                    <th>Station</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>Details</th>
+                    <th>Rating</th>
+                     {% for o in openClosedHazards %}
+                          {% if o.status == 'Open' %}
+                            {% if forloop.counter == 1 %}
+                            <th>Status</th>
+                            {% endif %}
+                          {% else %}
+                            {% if forloop.counter == 1 %}
+                            <th>View</th>
+                            {% endif %}
+                          {% endif %}
+                      {% endfor %}
+                    <th>Status</th>
+
+
+               </tr>
+              </thead>
+              <tbody>
+              {% for o in filter_results %}
+                    <tr>
+                        <td><a href="{% url 'detailedView' o.report_no %}">{{o.report_no}}</a></td>
+                        <td>{{o.station}}</td>
+                        <td>{{o.location_of_incident}}</td>
+                        <td>{{o.date_of_incident}}</td>
+                        <td>{{o.incident_detail|truncatewords:10}}</td>
+                         <td>{% if o.rating <= 8 %}
+                             <i class="fas fa-circle " style="color: blue"></i>
+                             {% elif 8 < o.rating and o.rating <= 16 %}
+                             <i class="fas fa-circle " style="color: yellow"></i>
+                             {% elif 16 < o.rating and o.rating <= 25 %}
+                             <i class="fas fa-circle " style="color: red"></i>
+                             {% else %}
+                             <i class="fas fa-circle " style="color: black"></i>
+                             {% endif %}
+                         </td>
+                        <td>{% if o.due == 'OD' %}
+                            <span class="badge badge-pill badge-danger ">{{o.due}}</span>
+                            {% elif o.due == 'OK' %}
+                            <span class="badge badge-pill badge-primary ">{{o.due}}</span>
+                        {% else %}
+                            <span class="badge badge-pill badge-success ">CL</span>
+                        {% endif %}</td>
+
+                    </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+              <h6>Please enter a valid search criteria </h6>
+          {% endif %}
+
+          </div>
+             </main>
+
+{% endblock %}

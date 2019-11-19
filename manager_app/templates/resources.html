@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+{% include 'nav.html' %}
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Expired Courses</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+              </button>
+            </div>
+          </div>
+
+
+        <form class="form-inline">
+
+    <label>Course</label>
+      <div class="col-md-2">
+
+          <select style="width: 100%" class="form-control form-control-sm "  name="p">
+
+              <option selected="selected" value="0"> </option>
+              {% for c in course %}
+              <option value="{{c.id}}">{{c.course_name}}</option>
+              {% endfor %}
+          </select>
+      </div>
+             <label>Department</label>
+             <div class="col-md-2">
+          <select style="width: 100%" class="form-control form-control-sm"  name="q">
+              <option selected="selected" value="0"> </option>
+              {% for d in department %}
+              <option value="{{d.id}}">{{d.department_name}}</option>
+              {% endfor %}
+          </select>
+      </div>
+            <label>Section</label>
+             <div class="col-md-2">
+          <select style="width: 100%" class="form-control form-control-sm"  name="r">
+              <option selected="selected" value="0"> </option>
+              {% for s in section %}
+              <option value="{{s.id}}">{{s.section_name}}</option>
+              {% endfor %}
+          </select>
+      </div>
+            <label>Title</label>
+             <div class="col-md-2">
+          <select style="width: 100%" class="form-control form-control-sm"  name="s">
+              <option selected="selected" value="0"></option>
+              {% for j in job_title %}
+              <option value="{{j.id}}">{{j.title}}</option>
+              {% endfor %}
+          </select>
+      </div>
+            <div class="col-md-1">
+                <label></label>
+             <input class="btn btn-info btn-sm" type="submit" value="filter" >
+            </div>
+
+        </form>
+<hr>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                   <th>resource title</th>
+                  <th>course</th>
+                  <th>trainer</th>
+                  <th>File</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for resource in resources %}
+                    <tr>
+                      <td>{{resource.title}}</td>
+                      <td>{{resource.course}}</td>
+                      <td>{{resource.trainer}}</td>
+                       <td><a href='{{resource.file.url}}'>{{resource.file}}</a></td>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
+          </div>
+             </main>
+
+
+
+{% endblock %}

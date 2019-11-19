@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+{% include 'operations_nav.html' %}
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Quick View </h1>
+          </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+              <div class="card-header">
+                <strong> Hazards <i class="fas fa-exclamation-triangle float-right" style="color: red"></i></strong>
+              </div>
+              <ul class="list-group list-group-flush">
+               <li class="list-group-item"> <a href="{% url 'assessmentList' %}"> Unevaluated Hazards<span class="badge badge-pill badge-danger float-right">{{unevaluated}}</span></a></li>
+                <li class="list-group-item "> <a href="{% url 'openhazards' %}"> Open Hazards <span class="badge badge-pill badge-primary float-right">{{openHazards}}</span></a></li>
+                  <li class="list-group-item"> <a href="{% url 'closedhazards'  %}"> Closed Hazards <span class="badge badge-pill badge-dark float-right ">{{closedHazards}}</span></a></li>
+                  <li class="list-group-item"><a href="{% url 'dashboard' %}" >Analysis & Reports</a> </li>
+              </ul>
+            </div>
+                </div>
+
+                <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+              <div class="card-header">
+                Incidents & Accidents
+              </div>
+              <ul class="list-group list-group-flush">
+               <a href="#"> <li class="list-group-item">  Active Hazards <span class="badge badge-pill badge-danger float-right">6</span></li></a>
+                <li class="list-group-item ">Closed Hazards <span class="badge badge-pill badge-primary float-right">18</span></li>
+                <li class="list-group-item ">Achived Hazards <span class="badge badge-pill badge-warning float-right ">20</span></li>
+                  <li class="list-group-item">Analysis & Reports <span class="badge badge-pill badge-dark float-right ">6</span></li>
+              </ul>
+            </div>
+                </div>
+
+                <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+              <div class="card-header">
+                Library
+              </div>
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item">  <a href="{% url 'downloads'  %}">Current Manuals</a><span class="badge badge-pill badge-danger float-right">{{docCount}}</span></li>
+                  <li class="list-group-item ">  <a href="{% url 'downloads'  %}">Forms</a><span class="badge badge-pill badge-primary float-right">{{checklistCount}}</span></li>
+                  <li class="list-group-item "> <a href="{% url 'downloads'  %}">Checklists</a><span class="badge badge-pill badge-warning float-right ">{{formCount}}</span></li>
+                 <li class="list-group-item"> <a href="{% url 'downloads'  %}">Bulletins</a><span class="badge badge-pill badge-dark float-right ">{{bulletinCount}}</span></li>
+              </ul>
+            </div>
+                </div>
+                </div>
+
+             </main>
+{% endblock %}

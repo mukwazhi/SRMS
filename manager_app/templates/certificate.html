@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+{% include 'nav.html' %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <img src="{{ MEDIA_URL }}{{ cert.certificate }}" alt="Park" style=" width: 80%; height:100%;" >
+</main>
+
+{% endblock %}

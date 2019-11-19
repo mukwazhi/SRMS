@@ -1,0 +1,421 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+{% block content %}
+{% include 'operations_nav.html' %}
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          </div>
+          <div>
+            <div class="container report-form">
+                <div class="row">
+                <h3> Enterprise Analysis</h3>
+                <h6 class="col-md-2 float-right"><span class="badge badge-pill badge-primary">All</span></h6>
+                     {% for hc in stationDash %}
+                        <h6 class="col-md-2 float-right"><span class="badge badge-pill badge-danger ">
+                            <a href="{% url 'stationReport' hc.id %}"> {{hc.station}}</a> </span></h6>
+                     {% endfor %}
+
+
+                <script src="https://code.highcharts.com/highcharts.js"></script>
+                </div>
+                <hr>
+
+                <div class="row">
+                <!--                    Hazard type Distribution-->
+                    <div class="col-md-6">
+                        <div id="container" style="width:100%; height:200px;"></div>
+                    </div>
+
+
+<!--                                        Hazard Category Distribution-->
+                     <div class="col-md-6">
+                    <div id="container1" style="min-width: 310px; max-width: 100%; height: 200px; margin: 0 auto"></div>
+                          <script>
+           Highcharts.chart('container1', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Hazard Distribution '
+                },
+                subtitle: {
+
+                },
+                xAxis: {
+                    categories: [
+                    {% for hc in hazardCategory %}
+                    '{{hc.hazard_category}}',
+                    {% endfor %}
+                    ],
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Hazards',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' hazards'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor:
+                        Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Year 1800',
+                    data: [
+                     {% for hc in hazardCategory %}
+                    {{hc.hazards}},
+                    {% endfor %}
+                    ]
+                }]
+            });
+		</script>
+                     </div>
+                </div>
+                <hr>
+                <div class="row">
+<!--                                         Station Hazard Category Distribution-->
+                     <div class="col-md-6">
+                         <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                         <div id="container2" style="min-width: 310px; max-width: 100%; height: 300px; margin: 0 auto"></div>
+                         <script>
+                           Highcharts.chart('container2', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Hazards By Station'
+                    },
+                    xAxis: {
+                        categories: [{% for st in stationDash %}
+                        '{{st.station}}',
+                        {% endfor %}]
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Total fruit consumption'
+                        },
+                        stackLabels: {
+                            enabled: true,
+                            style: {
+                                fontWeight: 'bold',
+                                color: ( // theme
+                                    Highcharts.defaultOptions.title.style &&
+                                    Highcharts.defaultOptions.title.style.color
+                                ) || 'gray'
+                            }
+                        }
+                    },
+                    legend: {
+                        align: 'right',
+                        x: -30,
+                        verticalAlign: 'top',
+                        y: 25,
+                        floating: true,
+                        backgroundColor:
+                            Highcharts.defaultOptions.legend.backgroundColor || 'white',
+                        borderColor: '#CCC',
+                        borderWidth: 1,
+                        shadow: false
+                    },
+                    tooltip: {
+                        headerFormat: '<b>{point.x}</b><br/>',
+                        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: 'normal',
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Count',
+                        data: [{% for st in stationHazard %}
+                        {{st.stationCount}},
+                        {% endfor %}],
+                    }, ]
+                });
+
+                         </script>
+                     </div>
+
+                 <div class="col-md-6">
+                         <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                         <div id="container3" style="min-width: 310px; max-width: 100%; height: 300px; margin: 0 auto"></div>
+                         <script>
+                           Highcharts.chart('container3', {
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Reported Hazards By Month'
+                            },
+                           xAxis: {
+                                categories: [
+
+
+                                            'Jan',
+
+                                              'Feb',
+
+                                            'Mar',
+
+                                            'Apr',
+
+                                           'May',
+
+                                             'Jun',
+
+                                              'Jul',
+
+                                            'Aug',
+
+                                              'Sep',
+
+                                             'Oct',
+
+                                            'Nov',
+
+                                            'Dec'
+
+
+                                ],
+                                crosshair: true
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: {
+                                    text: 'Reported Hazards'
+                                }
+                            },
+                            tooltip: {
+                                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                                footerFormat: '</table>',
+                                shared: true,
+                                useHTML: true
+                            },
+                            plotOptions: {
+                                column: {
+                                    pointPadding: 0.2,
+                                    borderWidth: 0
+                                }
+                            },
+                            series: [{
+                                name: 'Hazards',
+                                data: [
+                                      {% for v in monthly %}
+                        {% if forloop.counter == 1  %}
+                            {% if v.month == 1 %}
+                          {{v.monthCount}},
+                            {% else %}
+                            0,
+                            {% endif %}
+                        {% elif v.month == 2 %}
+                            {{v.monthCount}},
+                        {% elif forloop.counter == 3  %}
+                            {% if v.month == 3  %}
+                          {{v.monthCount}},
+                            {% else %}
+                            0,
+                            {% endif %}
+                        {% elif v.month == 4 %}
+                            {{v.monthCount}},
+                        {% elif v.month == 5 %}
+                             {{v.monthCount}},
+                        {% elif v.month == 6 %}
+                            {{v.monthCount}},
+                        {% elif v.month == 7 %}
+                            {{v.monthCount}},
+                        {% elif v.month == 8 %}
+                            {{v.monthCount}},
+                        {% elif v.month == 9 %}
+                            {{v.monthCount}},
+                        {% elif v.month == 10 %}
+                            {{v.monthCount}},
+                        {% elif v.month == 11 %}
+                            {{v.monthCount}},
+                        {% elif v.month == 12 %}
+                             {{v.monthCount}},
+                        {% else %}
+                            0,
+                        {% endif %}
+                    {% endfor %}
+                                ]
+
+                            }]
+                        });
+
+                         </script>
+                     </div>
+                </div>
+                <hr>
+                <div class="row">
+<!--                                         Station Hazard Category Distribution-->
+                     <div class="col-md-6">
+                         <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+                         <div id="container4" style="min-width: 310px; max-width: 100%; height: 300px; margin: 0 auto"></div>
+                         <script>
+                          // Radialize the colors
+                        Highcharts.setOptions({
+                            colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+                                return {
+                                    radialGradient: {
+                                        cx: 0.5,
+                                        cy: 0.3,
+                                        r: 0.7
+                                    },
+                                    stops: [
+                                        [0, color],
+                                        [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                                    ]
+                                };
+                            })
+                        });
+
+                        // Build the chart
+                        Highcharts.chart('container4', {
+                            chart: {
+                                plotBackgroundColor: null,
+                                plotBorderWidth: null,
+                                plotShadow: false,
+                                type: 'pie'
+                            },
+                            title: {
+                                text: 'Hazard Closure'
+                            },
+                            tooltip: {
+                                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    allowPointSelect: true,
+                                    cursor: 'pointer',
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                        connectorColor: 'silver'
+                                    }
+                                }
+                            },
+                            series: [{
+                                name: 'Status',
+                                data: [
+                                {% for s in statusProgress %}
+                                    { name: '{{s.status}}', y: {{s.statusCheck}} },
+                                    {% endfor %}
+                                ]
+                            }]
+                        });
+                         </script>
+                     </div>
+
+                 <div class="col-md-6">
+                     {% for hc in stationDash %}
+
+                        <h6><a href="{% url 'stationReport' hc.id %}"> {{hc.station}}</a></h6>
+
+
+                     {% endfor %}
+
+
+
+<!--                     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
+<!--                <script type="text/javascript">-->
+<!--                  google.charts.load("current", {packages:["corechart"]});-->
+<!--                  google.charts.setOnLoadCallback(drawChart);-->
+<!--                  function drawChart() {-->
+<!--                    var data = google.visualization.arrayToDataTable([-->
+<!--                      ['Task', 'Hours per Day'],-->
+<!--                      ['Work',     11],-->
+<!--                      ['Eat',      2],-->
+<!--                      ['Commute',  2],-->
+<!--                      ['Watch TV', 2],-->
+<!--                      ['Sleep',    7]-->
+<!--                    ]);-->
+
+<!--                    var options = {-->
+<!--                      title: 'My Daily Activities',-->
+<!--                      pieHole: 0.4,-->
+<!--                    };-->
+
+<!--                    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));-->
+<!--                    chart.draw(data, options);-->
+<!--                  }-->
+<!--                </script>-->
+<!--                     <div id="donutchart" style="width: 100%; height: 300px;"></div>-->
+                     </div>
+                </div>
+                 </div>
+
+                    <hr>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                        var myChart = Highcharts.chart('container', {
+                            chart: {
+                                type: 'bar'
+                            },
+                            title: {
+                                text: 'Hazard Reports'
+                            },
+                            xAxis: {
+                                categories: ['AirCraft Related', 'Non AirCraft Related']
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'hazards'
+                                }
+                            },
+                            series: [{
+                                name: 'Hazards',
+
+                                data: [
+                                {% for ht in hazardType %}
+                                {{ht.hazards}},
+                                {% endfor %}
+                                ]
+
+                            }]
+                        });
+                    });
+                    </script>
+
+                </div>
+             </main>
+{% endblock %}

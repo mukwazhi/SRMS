@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+{% include 'operations_nav.html' %}
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          </div>
+          <div>
+            <div class="container ">
+                <div class="row">
+        <div class=" col-md-9">
+            {% for d in detailed_report %}
+        <div class="panel panel-default">
+              <div class="panel-heading"><b>Hazard {{d.report_no}} Details </b>
+                  {% if d.status == 'Open' %}
+                  <span class="badge badge-pill  badge-danger float-right ">
+                      {{d.status}}</span></div>
+                   {% else %}
+                    <span class="badge badge-pill badge-primary float-right ">
+                      {{d.status}}</span>
+                    {% endif %}
+            <hr>
+              <div class="panel-body">
+                  <div class="row">
+                      <div class="col-md-6">Station : {{ d.station }}</div>
+                      <div class="col-md-6">Location : {{ d.location_of_incident}}</div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">Date : {{ d.date_of_incident }}</div>
+                      <div class="col-md-6">Time  : {{ d.time_of_incident}}</div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6"> Hazard Type : {{ d.hazard_type}}</div>
+                      <div class="col-md-6">Hazard Category : {{ d.hazard_category}}</div>
+              </div>
+                  <div class="row">
+                      <div class="col-md-6"> Reported by : {{ d.assignment}}</div>
+                      <div class="col-md-6">Assigned to : {{ d.assignment}}</div>
+              </div>
+                  <br>
+                  <hr>
+                  <div class="row">
+                      <div class="col-md-3"> <h6>Likelyhood </h6>
+                              <p> <span class="badge badge-pill  badge-light">{{d.likelyhood}}</span></p>
+                        </div>
+
+                       <div class="col-md-3"> <h6>Severity </h6>
+                              <p> <span class="badge badge-pill  badge-light">
+                                  {{d.severity}}</span></p></div>
+
+                          <div class="col-md-3"> <h6>Overall Risk Rating </h6>
+                              {% if d.rating <= 8 %}
+                              <p> <span class="badge badge-pill  badge-primary">
+                                  {{d.rating}}</span></p>
+                        {% elif  8 < d.rating  and d.rating <= 16 %}
+
+                              <p> <span class="badge badge-pill  badge-warning">
+                                  {{d.rating}}</span></p>
+                        {% elif 16 < d.rating and d.rating <= 25 %}
+
+                              <p> <span class="badge badge-pill  badge-danger">
+                                  {{d.rating}}</span></p>
+                        {% endif %}</div>
+              </div>
+                  <hr>
+                      <div class="row">
+                          <div class="col-md-12"> <h6>Hazard Description </h6>
+                              <p>{{ d.incident_detail}}</p></div>
+              </div>
+
+                   <div class="row">
+                          <div class="col-md-12"> <h6>Proposed Mitigation </h6>
+                              {% if d.proposed_mitigation %}
+                              <p>{{ d.proposed_mitigation}}</p></div>
+                                {% else %}
+                                <p>Pending</p></div>
+                                  {% endif %}
+                    </div>
+
+                  <div class="row">
+                     <div class="col-md-12"> <h6>Corrective Action Required</h6>
+                              {% if d.action_required %}
+                              <p>{{ d.action_required}}</p></div>
+                                {% else %}
+                                <p>Pending</p></div>
+                                  {% endif %}
+                  </div>
+                   <div class="row">
+                     <div class="col-md-12"> <h6>Resources Required</h6>
+                             {% if d.resources_required %}
+                              <p>{{ d.resources_required}}</p></div>
+                                {% else %}
+                                <p>Pending</p></div>
+                                  {% endif %}
+                  </div>
+                   <div class="row">
+                     <div class="col-md-12"> <h6>Corrective Action Taken</h6>
+                             {% if d.Action_Taken %}
+                              <p>{{ d.Action_Taken}}</p></div>
+                                {% else %}
+                                        <p><a href="#"> Action pending</a> </p>
+                                {% endif %}
+                       </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-12"> <h6>Closure Evidence</h6>
+                              <p>{{ d.evidence_of_closure}}</p></div>
+                  </div>
+                <hr>
+                <div class="row">
+
+                      <div class="col-md-3"> <h6>Residual Likelyhood </h6>
+                              <p> <span class="badge badge-pill  badge-light">{{d.residual_likelyhood}}</span></p>
+                        </div>
+
+                       <div class="col-md-3"> <h6>Residual Severity </h6>
+                              <p> <span class="badge badge-pill  badge-light">
+                                  {{d.residual_severity}}</span></p></div>
+
+                          <div class="col-md-3"> <h6>Overall Risk Rating </h6>
+                              {% if d.residual_rating <= 8 %}
+<!--                            <p> <i class="fas fa-circle " style="color: green"></i></p>-->
+                              <p> <span class="badge badge-pill  badge-primary">
+                                  {{d.residual_rating}}</span></p>
+                        {% elif  8 < d.residual_rating  and d.residual_rating <= 16 %}
+<!--                            <p><i class="fas fa-circle " style="color: green"></i></p>-->
+                              <p> <span class="badge badge-pill  badge-warning">
+                                  {{d.residual_rating}}</span></p>
+                        {% elif 16 < d.residual_rating and d.residual_rating <= 25 %}
+<!--                            <p><i class="fas fa-circle " style="color: yellow"></i></p>-->
+                              <p> <span class="badge badge-pill  badge-danger">
+                                  {{d.residual_rating}}</span></p>
+                        {% endif %}</div>
+              </div>
+                <hr>
+        </div>
+
+            {% endfor %}
+
+          </div>
+
+        </div>
+            </div>
+            </div>
+
+             </main>
+{% endblock %}
+

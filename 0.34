@@ -1,0 +1,28 @@
+Collecting WeasyPrint
+  Using cached https://files.pythonhosted.org/packages/39/70/160b94a31be9151cbdf582206e3d8392c8ec11b1f430c4759e4c5a095f3f/WeasyPrint-43-py3-none-any.whl
+Requirement already satisfied: html5lib>=0.999999999 in c:\users\bmukwazhi.nhszim\pycharmprojects\trainingproject\trainingvenv\lib\site-packages (from WeasyPrint) (1.0.1)
+Collecting cffi>=0.6 (from WeasyPrint)
+  Using cached https://files.pythonhosted.org/packages/05/3f/abc53d8f0c7362181d809c913c2b348e41c193eff84c2f0445da2b615f69/cffi-1.11.5-cp36-cp36m-win32.whl
+Collecting cssselect2>=0.1 (from WeasyPrint)
+  Using cached https://files.pythonhosted.org/packages/12/e2/91fcd4cd32545beec6e11628d64d3e20f11b5a95dd1ccf3216fd69f176b7/cssselect2-0.2.1-py2.py3-none-any.whl
+Collecting tinycss2>=0.5 (from WeasyPrint)
+  Using cached https://files.pythonhosted.org/packages/88/95/0ec73db7fc638ec000e662936ffe1a4e1eaa22f2861c8de18b1597c42584/tinycss2-0.6.1-py2.py3-none-any.whl
+Collecting Pyphen>=0.8 (from WeasyPrint)
+  Using cached https://files.pythonhosted.org/packages/15/82/08a3629dce8d1f3d91db843bb36d4d7db6b6269d5067259613a0d5c8a9db/Pyphen-0.9.5-py2.py3-none-any.whl
+Collecting CairoSVG>=1.0.20 (from WeasyPrint)
+  Using cached https://files.pythonhosted.org/packages/5c/57/dadc80948bcb83ea9c0968ccfd5a1a25ace6be0884484526f70dad3c10b9/CairoSVG-2.2.1-py3-none-any.whl
+Collecting cairocffi>=0.9.0 (from WeasyPrint)
+  Using cached https://files.pythonhosted.org/packages/62/be/ad4d422b6f38d99b09ad6d046ab725e8ccac5fefd9ca256ca35a80dbf3c6/cairocffi-0.9.0.tar.gz
+Requirement already satisfied: webencodings in c:\users\bmukwazhi.nhszim\pycharmprojects\trainingproject\trainingvenv\lib\site-packages (from html5lib>=0.999999999->WeasyPrint) (0.5.1)
+Requirement already satisfied: six>=1.9 in c:\users\bmukwazhi.nhszim\pycharmprojects\trainingproject\trainingvenv\lib\site-packages (from html5lib>=0.999999999->WeasyPrint) (1.11.0)
+Collecting pycparser (from cffi>=0.6->WeasyPrint)
+  Using cached https://files.pythonhosted.org/packages/68/9e/49196946aee219aead1290e00d1e7fdeab8567783e83e1b9ab5585e6206a/pycparser-2.19.tar.gz
+Requirement already satisfied: pillow in c:\users\bmukwazhi.nhszim\pycharmprojects\trainingproject\trainingvenv\lib\site-packages (from CairoSVG>=1.0.20->WeasyPrint) (5.2.0)
+Collecting defusedxml (from CairoSVG>=1.0.20->WeasyPrint)
+  Using cached https://files.pythonhosted.org/packages/87/1c/17f3e3935a913dfe2a5ca85fa5ccbef366bfd82eb318b1f75dadbf0affca/defusedxml-0.5.0-py2.py3-none-any.whl
+Installing collected packages: pycparser, cffi, tinycss2, cssselect2, Pyphen, defusedxml, cairocffi, CairoSVG, WeasyPrint
+  Running setup.py install for pycparser: started
+    Running setup.py install for pycparser: finished with status 'done'
+  Running setup.py install for cairocffi: started
+    Running setup.py install for cairocffi: finished with status 'done'
+Successfully installed CairoSVG-2.2.1 Pyphen-0.9.5 WeasyPrint-43 cairocffi-0.9.0 cffi-1.11.5 cssselect2-0.2.1 defusedxml-0.5.0 pycparser-2.19 tinycss2-0.6.1

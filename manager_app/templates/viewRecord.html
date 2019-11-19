@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+    <h1>Record</h1>
+
+
+        {% for v in vRecord.department_set.all %}
+            {{v.department_name}}
+        {% endfor %}
+
+</body>
+</html>

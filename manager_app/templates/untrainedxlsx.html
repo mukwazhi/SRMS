@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+{% include 'nav.html' %}
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h6>PDF for Training List</h6>
+            <div class="btn-toolbar mb-2 mb-md-0">
+
+            </div>
+          </div>
+
+
+     <form class="form-inline">
+             <label>Course</label>
+             <div class="col-md-2">
+              <select style="width: 100%" class="form-control form-control-sm"  name="p">
+                  <option selected="selected" value="0"> </option>
+                  {% for c in course %}
+                  <option value="{{c.id}}">{{c.course_name}}</option>
+                  {% endfor %}
+              </select>
+             </div>
+
+             <label>Depart</label>
+             <div class="col-md-2">
+              <select style="width: 100%" class="form-control form-control-sm"  name="q">
+                  <option selected="selected" value="0"> </option>
+                  {% for d in department %}
+                  <option value="{{d.id}}">{{d.department_name}}</option>
+                  {% endfor %}
+              </select>
+             </div>
+             <label>Section</label>
+                 <div class="col-md-2">
+                  <select style="width: 100%" class="form-control form-control-sm"  name="r">
+                      <option selected="selected" value="0"> </option>
+                      {% for s in section %}
+                      <option value="{{s.id}}">{{s.section_name}}</option>
+                      {% endfor %}
+                  </select>
+             </div>
+
+            <div class="col-md-2">
+             <input class="btn btn-info btn-sm" type="submit" value="filter">
+            </div>
+        </form>
+            <hr>
+
+<div class="row">
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+      <div class="card card-body">
+          <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Training Date</label>
+                <input type="date" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="training date" name="td">
+                <small id="dateHelp" class="form-text text-muted">Search a specific training date.</small>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            </form>
+
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="collapse multi-collapse" id="multiCollapseExample2">
+      <div class="card card-body">
+       <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Employee Number</label>
+                <input type="number" class="form-control form-control-sm" id="staff_number" aria-describedby="searchHelp" placeholder="Staff code" name="eey">
+                <small id="searchHelp" class="form-text text-muted">Employee Search.</small>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+             </main>
+
+
+{% endblock %}

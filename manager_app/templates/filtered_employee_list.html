@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% block content %}
+{% include 'nav.html' %}
+
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Employees </h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+             </div>
+          </div>
+
+
+
+        <form class="form-inline">
+
+             <label>Department</label>
+             <div class="col-md-2">
+          <select style="width: 100%" class="form-control form-control-sm"  name="q">
+              <option selected="selected" value="0"> </option>
+              {% for d in department %}
+              <option value="{{d.id}}">{{d.department_name}}</option>
+              {% endfor %}
+          </select>
+      </div>
+            <label>Section</label>
+             <div class="col-md-2">
+          <select style="width: 100%" class="form-control form-control-sm" name="r">
+              <option selected="selected" value="0"> </option>
+              {% for s in section %}
+              <option value="{{s.id}}">{{s.section_name}}</option>
+              {% endfor %}
+          </select>
+      </div>
+            <label>Title</label>
+             <div class="col-md-2">
+          <select style="width: 100%" class="form-control form-control-sm"  name="s">
+              <option selected="selected" value="0"></option>
+              {% for j in job_title %}
+              <option value="{{j.id}}">{{j.title}}</option>
+              {% endfor %}
+          </select>
+      </div>
+            <div class="col-md-2">
+                <label></label>
+             <input class="btn btn-info btn-sm" type="submit" value="filter">
+            </div>
+
+        </form>
+<hr>
+
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+             <thead>
+                <tr>
+                  <th>Staff #</th>
+                  <th>Name</th>
+                  <th>Surname</th>
+                  <th>Department</th>
+                  <th>Section</th>
+                  <th>Job Title</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% if employees %}
+              {% for e in employees%}
+                <tr>
+                  <td>{{e.staff_number}}</td>
+                  <td>{{e.employee_name}}</td>
+                    <td>{{e.employee_surname}}</td>
+                    <td>{{e.department}}</td>
+                    <td>{{e.section}}</td>
+                    <td>{{e.job_title}}</td>
+                </tr>
+              {% endfor %}
+              {% else %}
+              {% for e in filtered_employees%}
+                <tr>
+                    <td><a href="{% url 'training_history' e.staff_number %}">{{e.staff_number}}</a></td>
+                  <td>{{e.employee_name}}</td>
+                    <td>{{e.employee_surname}}</td>
+                    <td>{{e.department}}</td>
+                    <td>{{e.section}}</td>
+                    <td>{{e.job_title}}</td>
+                </tr>
+              {% endfor %}
+
+              {% endif %}
+
+              </tbody>
+            </table>
+
+              <div class="pagination">
+                    <span class="step-links">
+                    {% if employees.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ expired_info.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="current">
+                        Page {{ employees.number }} of {{ employees.paginator.num_pages }}.
+                    </span>
+                    {% if employees.has_next %}
+                        <a href="?page={{ employees.next_page_number }}">next</a>
+                        <a href="?page={{ employees.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                    </span>
+            </div>
+          </div>
+             </main>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

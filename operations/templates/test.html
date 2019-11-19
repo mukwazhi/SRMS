@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello</h1>
+    {% for detail in details %}
+        <h4>{{detail.flightNumber}}</h4>
+    {% for m in detail.flightmovement_set.all %}
+    <p>{{m.routing}}</p>
+    <p>{{m.arrivalTime}}</p>
+    <p>{{m.departureTime}}</p>
+    {% endfor %}
+
+    {% endfor %}
+</body>
+</html>

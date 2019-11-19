@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+{% block content %}
+{% include 'operations_nav.html' %}
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          </div>
+          <div>
+            <div class="container report-form">
+        <div class=" col-md-9 col-md-offset-3">
+        <form method="post" action="#">{% csrf_token%}
+        <div class="panel panel-default">
+              <div class="panel-heading"><b>Hazard Details</b></div>
+             <div class="panel-body">
+                  <div class="row">
+                      <div class="col-md-3 "> {{riskForm.station|bootstrap }}</div>
+                      <div class="col-md-3"> {{riskForm.location_of_incident|bootstrap }}</div>
+                      <div class="col-md-6"> {{ riskForm.date_of_incident|bootstrap }}</div>
+                      <div class="col-md-3"> {{ riskForm.time_of_incident|bootstrap }}</div>
+                      <div class="col-md-3"> {{ riskForm.hazard_type|bootstrap }}</div>
+                      <div class="col-md-6"> {{ riskForm.hazard_category|bootstrap }}</div>
+              </div>
+                  <div class="row">
+                  <div class="col-md-6">{{ riskForm.incident_detail|bootstrap }}</div>
+                      <div class="col-md-6">{{ riskForm.proposed_mitigation|bootstrap }}</div>
+                      <div class="col-md-6">{{ riskForm.likelyhood|bootstrap }}</div>
+                  <div class="col-md-6"> {{ riskForm.severity|bootstrap }} </div>
+                    </div>
+                  <div class="col-md-6"> {{ riskForm.approval|bootstrap }} </div>
+              </div>
+              </div>
+
+            <button type='submit' class="btn btn-success" data-toggle="" style="width: 100%; margin-top: 10px;">Submit</button>
+        </form>
+
+          </div>
+            </div>
+          </div>
+
+             </main>
+{% endblock %}
