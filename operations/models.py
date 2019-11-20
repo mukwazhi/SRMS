@@ -18,7 +18,7 @@ class RiskDetail(models.Model):
     report_no = models.CharField(max_length=500, default=report_number, null=True, blank=True)
     station = models.ForeignKey('Station', max_length=100, null=True,blank=True, on_delete=models.DO_NOTHING)
     location_of_incident = models.ForeignKey('Location', on_delete=models.DO_NOTHING, null=True, blank=True)
-    date_of_incident = models.DateField(null=True, blank=True)
+    date_of_incident = models.DateField(null=True, blank=True, verbose_name="Date")
     time_of_incident = models.TimeField(null=True, blank=True)
     HAZARDTYPE = (
         ('Aircraft Related','Aircraft Related'),
@@ -33,7 +33,7 @@ class RiskDetail(models.Model):
         ('personal & equipment hazard', 'Personal & equipment hazard')
     )
     hazard_category = models.CharField(max_length=100, choices=HAZARDCAT, null=True,blank=True)
-    incident_detail = models.TextField(max_length=3000, null=True,blank=True)
+    incident_detail = models.TextField(max_length=3000, null=True,blank=True, verbose_name="Hazard Details")
     Rating_CHOICES = (
         (1, 'Extremely Improbable'),
         (2, 'Improbable'),
